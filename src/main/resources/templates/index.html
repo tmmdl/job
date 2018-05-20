@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jobs</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<div style="margin: 40px" th:each="job, iterStat: ${jobs}">
+
+    <input style="display: none;" th:value="${job.id}">
+    <div>
+        <span style="font-weight: 700;">Name: </span><span style="color:gray" th:text="${job.name}"/>
+    </div>
+    <div>
+        <span style="font-weight: 700;">Description: </span> <span th:text="${job.description}"/>
+    </div>
+    <div>
+        <span style="font-weight: 700;"> Created: </span><span th:text="${job.created}"/>
+    </div>
+    <div th:if="${job.marked}">
+        <span style="color:green">MARKED</span> <input type="checkbox" checked="checked" th:onclick="'mark(' + ${job.id} + ')'"/>
+    </div>
+    <div th:unless="${job.marked}">
+
+        <span >MARK</span> <input type="checkbox" th:onclick="'mark(' + ${job.id} + ')'"/>
+
+    </div>
+</div>
+
+
+</body>
+
+<script>
+
+    function mark(job_id){
+
+        $.ajax(
+            {
+                "url" :'/jobs/' + job_id + '/mark/',
+                "success": function (data) {
+                    alert(data['message'])
+                },
+                "error": function (xhr, status, error) {
+                    alert('Error')
+                    console.log(error)
+                }
+
+            }
+        )
+    }
+</script>
+</html>
