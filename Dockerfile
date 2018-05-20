@@ -7,7 +7,6 @@ RUN apk add maven --update-cache --repository http://dl-4.alpinelinux.org/alpine
 WORKDIR /app
 COPY src /app/src
 COPY *.sh /app
-COPY *.jar /app
 COPY pom.xml /app/pom.xml
 RUN mvn package
 RUN touch file1
