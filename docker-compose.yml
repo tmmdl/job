@@ -13,13 +13,21 @@ services:
 
     depends_on:
       - postgres
-
+    networks:
+      - internal
 #    environment:
 #      - DB_HOST: postgres
   postgres:
     image: postgres
+    networks:
+      - internal
 
 
 volumes:
   maven-repo:
+
+networks:
+  internal:
+    driver: bridge
+
 
