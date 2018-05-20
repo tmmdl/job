@@ -9,7 +9,9 @@ services:
       - '8080:8080'
     volumes:
 #      - .:/app
-      - maven-repo:/usr/share/maven/lib
+      - ./src/:/app/src/
+      - ./entry.sh/:/app/entry.sh
+      - maven-repo:/root/.m2/
 
     depends_on:
       - postgres
