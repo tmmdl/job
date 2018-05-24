@@ -38,6 +38,5 @@ public class UserRepositoryImpl implements UserAuthRepository {
         jobUser.setRoles(Arrays.asList(role));
         em.persist(jobUser);
         return jobUser;
-
     }
 }

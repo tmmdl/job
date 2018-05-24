@@ -16,10 +16,16 @@
 
     <input style="display: none;" th:value="${job.id}">
     <div>
-        <span style="font-weight: 700;">Name: </span><span style="color:gray" th:text="${job.name}"/>
+        <span style="font-weight: 700;">Position: </span><span style="color:gray" th:text="${job.name}"/>
     </div>
     <div>
-        <span style="font-weight: 700;">Description: </span> <span th:text="${job.description}"/>
+        <span style="font-weight: 700;">Employer: </span> <span th:text="${job.company}"/>
+    </div>
+    <div>
+        <span style="font-weight: 700;">Location: </span> <span th:text="${job.location}"/>
+    </div>
+    <div>
+        <span style="font-weight: 700;">Link: </span> <span th:text="${job.link}"/>
     </div>
     <div>
         <span style="font-weight: 700;"> Created: </span><span th:text="${job.created}"/>

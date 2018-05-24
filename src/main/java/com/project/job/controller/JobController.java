@@ -9,6 +9,7 @@ import com.project.job.model.JobUser;
 import com.project.job.model.Mark;
 import com.project.job.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +28,6 @@ import java.util.List;
 @Controller
 public class JobController {
 
-
     @Autowired
     JobRepository jobRepository;
 
@@ -38,12 +38,12 @@ public class JobController {
     RoleRepository roleRepository;
 
     @PostConstruct()
-    void init(){
+    void init() {
 
         JobUser tamerlan = this.userRepository.findByUsername("tamerlan");
         JobUser togrul = this.userRepository.findByUsername("togrul");
 
-        if (tamerlan == null && togrul == null){
+        if (tamerlan == null && togrul == null) {
 
             // TODO  for Registration process we should create separate page,
             // fetch parameters from registration form.
@@ -53,48 +53,43 @@ public class JobController {
 
         }
 
-        this.jobRepository.save(
-                new Job(
-                    "Senior Nese developer",
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    new Date()
-                )
-        );
+//        this.jobRepository.save(
+//                new Job(
+//                        "Senior Nese developer",
+//                        "Lorem Ipsum is simply dummy",
+//                        "location",
+//                        "company",
+//                        new java.sql.Date(),
+//                        "link",
+//                        "comment"
+//                )
+//        );
 
     }
 
-
-
     @RequestMapping("/index")
     @Transactional
-    public ModelAndView getIndex(){
+    public ModelAndView getIndex() {
         HashMap<String, Object> map = new HashMap<String, Object>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName(); //get logged in username
         JobUser authUser = userRepository.findByUsername(username);
 
         List<Job> jobs = this.jobRepository.findAllByOrderByCreatedDesc();
-        for (Job job: jobs){
+        for (Job job : jobs) {
 
-            for (Mark mark: authUser.getMarks()){
+            for (Mark mark : authUser.getMarks()) {
 
-                if (mark.getJob().getId().equals(job.getId())){
+                if (mark.getJob().getId().equals(job.getId())) {
 
                     job.setMarked(true);
                 }
             }
         }
         map.put("jobs", jobs);
-
         System.out.println(jobs);
         ModelAndView view = new ModelAndView("index", map);
 //        view.getModel()
         return view;
     }
-
-
-
-
-
-
 }

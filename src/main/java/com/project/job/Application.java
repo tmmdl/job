@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
+import javax.persistence.EntityManagerFactory;
+
 @EnableAutoConfiguration
 @ComponentScan({"com.project.job.controller", "com.project.job.dao", "com.project.job.configuration"})
 public class Application {

@@ -1,6 +1,5 @@
 package com.project.job.controller;
 
-
 import com.project.job.dao.JobRepository;
 import com.project.job.dao.MarkRepository;
 import com.project.job.dao.UserRepository;
@@ -32,7 +31,7 @@ public class JobRestController {
 
     @RequestMapping("/jobs/{id}/mark/")
     @Transactional
-    public ResponseEntity markJob(@PathVariable long id){
+    public ResponseEntity markJob(@PathVariable String id){
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName(); //get logged in username
@@ -43,7 +42,6 @@ public class JobRestController {
 
             return ResponseEntity.notFound().build();
         }
-
 
         Mark mark = markRepository.findByJobUserIdAndJobId(authUser.getId(), job.getId());
 
@@ -71,8 +69,5 @@ public class JobRestController {
                     }}
             );
         }
-
-
-
     }
 }

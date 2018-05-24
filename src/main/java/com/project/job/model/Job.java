@@ -8,19 +8,20 @@ import java.util.List;
 public class Job {
 
     @Id
-    @GeneratedValue
-    Long id;
-
-
-    @Column
-    String name;
-
     @Column(length = 2000)
-    String description;
-
-
+    private String id;
     @Column
-    Date created;
+    private String name;
+    @Column
+    private String location;
+    @Column
+    private String company;
+    @Column
+    private java.sql.Date created;
+    @Column (length = 2000)
+    private String link;
+    @Column
+    private String comment;
 
     @Transient
     boolean marked=false;
@@ -29,19 +30,21 @@ public class Job {
 
     }
 
-    public Job(String name, String description, Date created) {
-        this.name = name;
-        this.description = description;
-        this.created = created;
+    public Job(String id, String title, String location, String company, java.sql.Date date, String link, String comment) {
+        this.id = id;
+        this.name = title;
+        this.location = location;
+        this.company = company;
+        this.created = date;
+        this.link = link;
+        this.comment = comment;
     }
 
-
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -49,22 +52,49 @@ public class Job {
         return name;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLocation() {
+        return location;
     }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public java.sql.Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(java.sql.Date created) {
+        this.created = created;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public boolean isMarked() {
         return marked;
@@ -72,10 +102,6 @@ public class Job {
 
     public void setMarked(boolean marked) {
         this.marked = marked;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
