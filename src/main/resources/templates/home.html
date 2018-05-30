@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Jobs Home Page</title>
+</head>
+
+<h1 th:inline="text">Welcome!</h1>
+
+
+<div style="margin: 40px" th:each="job, iterStat: ${jobs}">
+
+    <input style="display: none;" th:value="${job.id}">
+    <div>
+        <span style="font-weight: 700;">Position: </span>
+        <a th:href="${job.link}"><span style="color:gray" th:text="${job.name}"/></a>
+    </div>
+    <div>
+        <span style="font-weight: 700;">Employer: </span> <span th:text="${job.company}"/>
+    </div>
+    <div>
+        <span style="font-weight: 700;">Location: </span> <span th:text="${job.location}"/>
+    </div>
+    <div>
+        <span style="font-weight: 700;"> Created: </span><span th:text="${job.created}"/>
+    </div>
+    <!--<div>-->
+        <!--<p>test</p>-->
+    <!--</div>-->
+</div>
+
+</body>
+</html>

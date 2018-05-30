@@ -67,6 +67,21 @@ public class JobController {
 
     }
 
+    @RequestMapping("/")
+    public ModelAndView getHome() {
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        List<Job> jobs = this.jobRepository.findAllByOrderByCreatedDesc();
+        Job job = new Job();
+
+        map.put("jobs", jobs);
+
+
+        ModelAndView view = new ModelAndView("home", map);
+
+        return view;
+    }
+
     @RequestMapping("/index")
     @Transactional
     public ModelAndView getIndex() {
