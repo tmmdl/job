@@ -62,16 +62,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and().formLogin()
                 .loginPage("/login/")
                 .failureUrl("/login?error=true").loginProcessingUrl("/login/")
-                .defaultSuccessUrl("/index/")
-                .usernameParameter("username")
-                .passwordParameter("password")
+                .defaultSuccessUrl("/index/") //index?
+                .usernameParameter("username") //why
+                .passwordParameter("password")  //why
                 .permitAll()
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout/"))
                 .logoutSuccessUrl("/login/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {

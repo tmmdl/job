@@ -40,7 +40,7 @@ public class JobRestController {
 
         if (job == null){
 
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); //!
         }
 
         Mark mark = markRepository.findByJobUserIdAndJobId(authUser.getId(), job.getId());

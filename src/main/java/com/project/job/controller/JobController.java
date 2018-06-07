@@ -40,15 +40,15 @@ public class JobController {
     @PostConstruct()
     void init() {
 
-        JobUser tamerlan = this.userRepository.findByUsername("tamerlan");
+//        JobUser tamerlan = this.userRepository.findByUsername("tamerlan");
         JobUser togrul = this.userRepository.findByUsername("togrul");
 
-        if (tamerlan == null && togrul == null) {
+        if (togrul == null) {
 
             // TODO  for Registration process we should create separate page,
             // fetch parameters from registration form.
             // However createUser is custom method and should be used
-            userRepository.save("tamerlan", "tamerlan");
+//            userRepository.save("tamerlan", "tamerlan");
             userRepository.save("togrul", "togrul");
 
         }
@@ -72,10 +72,7 @@ public class JobController {
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         List<Job> jobs = this.jobRepository.findAllByOrderByCreatedDesc();
-        Job job = new Job();
-
-        map.put("jobs", jobs);
-
+        map.put("jobs", jobs); //html template engine understands spring easily
 
         ModelAndView view = new ModelAndView("home", map);
 
@@ -85,6 +82,7 @@ public class JobController {
     @RequestMapping("/index")
     @Transactional
     public ModelAndView getIndex() {
+
         HashMap<String, Object> map = new HashMap<String, Object>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName(); //get logged in username
